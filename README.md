@@ -1,33 +1,22 @@
 # 👟 Digital Store — Projeto Final de Front-end
 
-Aplicação web de e-commerce desenvolvida em **React** como projeto final do módulo de Front-end, baseada no design oficial da **Digital Store** no Figma.
+Aplicação web de e-commerce desenvolvida em **React** como projeto final do módulo de Front-end, seguindo a identidade visual oficial da **Digital Store**.
 
 ## 🚀 Tecnologias Utilizadas
 
-* **[React](https://react.dev/)** (com **[Vite](https://vitejs.dev/)**)
-* **[React Router DOM](https://reactrouter.com/)** — navegação entre páginas
-* **[Bootstrap 5](https://getbootstrap.com/)** — layout responsivo e estilização
-* **[Lucide React](https://lucide.dev/)** — biblioteca de ícones
-* **CSS3** — variáveis customizadas para a paleta de cores oficial do Figma
+* **[React](https://react.dev/)** + **[Vite](https://vitejs.dev/)**
+* **[React Router DOM](https://reactrouter.com/)** — roteamento entre páginas e parâmetros de busca
+* **[Bootstrap 5](https://getbootstrap.com/)** — grid responsivo e componentes de interface
+* **[Lucide React](https://lucide.dev/)** — ícones
+* **CSS3** — variáveis customizadas para a paleta de cores oficial (`#C92071`, `#1F1F1F`, `#F9F8FE`, `#F6AA1C`)
 
-## 📄 Páginas e Funcionalidades
+## ✨ Páginas e Funcionalidades
 
-* **Página Inicial (`/`):** Banner principal (Hero), coleções em destaque, grade de produtos em alta e seção de oferta especial.
-* **Listagem de Produtos (`/products`):** Catálogo completo de itens com suporte a busca e filtros.
-* **Visualização do Produto (`/product/:id`):** Detalhes do item selecionado, preços, avaliações, opções de tamanho/cor e produtos relacionados.
-* **Layout Responsivo:** `Header` com barra de pesquisa e navegação ativa, e `Footer` padronizado em todas as rotas.
-
-## 📂 Estrutura do Projeto
-
-```text
-digital-store/
-├── public/
-├── src/
-│   ├── components/       # Header, Footer, Layout, ProductCard, ProductListing
-│   ├── data/             # products.js (catálogo de produtos)
-│   ├── pages/            # HomePage, ProductListingPage, ProductViewPage
-│   ├── App.jsx           # Configuração das rotas
-│   ├── index.css         # Paleta de cores e estilos globais
-│   └── main.jsx          # Ponto de entrada e importação do Bootstrap
-├── package.json
-└── README.md
+* **Home (`/`):**
+  * Banner principal (Hero) com chamada para ofertas.
+  * Seção de coleções em destaque e oferta especial.
+  * Grade de produtos em alta integrada ao catálogo.
+* **Listagem de Produtos (`/products`):**
+  * Busca integrada à barra de pesquisa do cabeçalho (`?filter=`).
+  * Filtros interativos por **Marca** e **Categoria** com opção de limpar filtros.
+  * Ordenação por **Mais relevantes**, **Menor preço** e **Maior
