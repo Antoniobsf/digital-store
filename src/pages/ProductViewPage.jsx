@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Star, ArrowRight } from 'lucide-react';
 import { products } from '../data/products';
@@ -11,15 +11,20 @@ export default function ProductViewPage() {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [addedMessage, setAddedMessage] = useState(false);
+  const timeoutRef = useRef(null);
 
-  // Reseta seleções e rola para o topo quando mudar de produto
+  // Reseta seleções, limpa timer pendente e rola para o topo quando mudar de produto
   useEffect(() => {
     if (product) {
-      setSelectedSize(product.sizes[0] || '');
-      setSelectedColor(product.colors[0] || '');
+      setSelectedSize(product.sizes?.[0] ?? '');
+      setSelectedColor(product.colors?.[0] ?? '');
       setAddedMessage(false);
     }
     window.scrollTo(0, 0);
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, [id, product]);
 
   if (!product) {
@@ -39,7 +44,8 @@ export default function ProductViewPage() {
 
   function handleBuy() {
     setAddedMessage(true);
-    setTimeout(() => setAddedMessage(false), 3000);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setAddedMessage(false), 3000);
   }
 
   return (
@@ -104,9 +110,9 @@ export default function ProductViewPage() {
           {/* Preço */}
           <div className="d-flex align-items-baseline gap-2 mb-4">
             <span className="fs-3 fw-bold text-dark">
-              R$ {(product.priceDiscount || product.price).toFixed(2).replace('.', ',')}
+              R$ {(product.priceDiscount ?? product.price).toFixed(2).replace('.', ',')}
             </span>
-            {product.priceDiscount && (
+            {product.priceDiscount != null && (
               <span className="text-secondary text-decoration-line-through">
                 R$ {product.price.toFixed(2).replace('.', ',')}
               </span>
@@ -120,57 +126,61 @@ export default function ProductViewPage() {
           </div>
 
           {/* Seleção de Tamanho */}
-          <div className="mb-4">
-            <p className="fw-bold small text-secondary mb-2">Tamanho</p>
-            <div className="d-flex flex-wrap gap-2">
-              {product.sizes.map((size) => (
-                <button
-                  key={size}
-                  type="button"
-                  onClick={() => setSelectedSize(size)}
-                  className={`btn btn-sm fw-bold ${
-                    selectedSize === size
-                      ? 'btn-ds-primary'
-                      : 'btn-outline-secondary bg-white text-dark'
-                  }`}
-                  style={{ minWidth: 44, height: 44 }}
-                >
-                  {size}
-                </button>
-              ))}
+          {product.sizes?.length > 0 && (
+            <div className="mb-4">
+              <p className="fw-bold small text-secondary mb-2">Tamanho</p>
+              <div className="d-flex flex-wrap gap-2">
+                {product.sizes.map((size) => (
+                  <button
+                    key={size}
+                    type="button"
+                    onClick={() => setSelectedSize(size)}
+                    className={`btn btn-sm fw-bold ${
+                      selectedSize === size
+                        ? 'btn-ds-primary'
+                        : 'btn-outline-secondary bg-white text-dark'
+                    }`}
+                    style={{ minWidth: 44, height: 44 }}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Seleção de Cor */}
-          <div className="mb-4">
-            <p className="fw-bold small text-secondary mb-2">Cor</p>
-            <div className="d-flex gap-2">
-              {product.colors.map((color) => (
-                <button
-                  key={color}
-                  type="button"
-                  onClick={() => setSelectedColor(color)}
-                  aria-label={`Cor ${color}`}
-                  className="rounded-circle p-0"
-                  style={{
-                    width: 32,
-                    height: 32,
-                    backgroundColor: color,
-                    border:
-                      selectedColor === color
-                        ? '3px solid #C92071'
-                        : '1px solid #ccc',
-                  }}
-                />
-              ))}
+          {product.colors?.length > 0 && (
+            <div className="mb-4">
+              <p className="fw-bold small text-secondary mb-2">Cor</p>
+              <div className="d-flex gap-2">
+                {product.colors.map((color) => (
+                  <button
+                    key={color}
+                    type="button"
+                    onClick={() => setSelectedColor(color)}
+                    aria-label={`Cor ${color}`}
+                    className="rounded-circle p-0"
+                    style={{
+                      width: 32,
+                      height: 32,
+                      backgroundColor: color,
+                      border:
+                        selectedColor === color
+                          ? '3px solid #C92071'
+                          : '1px solid #ccc',
+                    }}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Botão Comprar */}
           <button
             type="button"
             onClick={handleBuy}
-            className="btn fw-bold text-white px-5 py-2 w-100 w-md-auto"
+            className="btn fw-bold text-white px-5 py-2 w-100"
             style={{ backgroundColor: '#F6AA1C', borderRadius: 8 }}
           >
             COMPRAR
