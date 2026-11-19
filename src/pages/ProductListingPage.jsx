@@ -1,14 +1,14 @@
-import { useState, useMemo } from 'react';
+﻿import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { products } from '../data/products';
 import ProductListing from '../components/ProductListing';
 
-const CATEGORIES = ['Tênis', 'Camisetas', 'Calças', 'Bonés', 'Headphones'];
-const BRANDS = ['Nike', 'Adidas', 'K-Swiss', 'Puma', 'Digital', 'JBL', 'New Era'];
+const CATEGORIES = [...new Set(products.map((p) => p.category))];
+const BRANDS = [...new Set(products.map((p) => p.brand))];
 
 export default function ProductListingPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchFilter = searchParams.get('filter') || '';
+  const searchFilter = (searchParams.get('filter') || '').trim();
 
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
@@ -53,9 +53,9 @@ export default function ProductListingPage() {
     }
 
     if (sortBy === 'menor-preco') {
-      result.sort((a, b) => (a.priceDiscount || a.price) - (b.priceDiscount || b.price));
+      result.sort((a, b) => (a.priceDiscount ?? a.price) - (b.priceDiscount ?? b.price));
     } else if (sortBy === 'maior-preco') {
-      result.sort((a, b) => (b.priceDiscount || b.price) - (a.priceDiscount || a.price));
+      result.sort((a, b) => (b.priceDiscount ?? b.price) - (a.priceDiscount ?? a.price));
     }
 
     return result;
