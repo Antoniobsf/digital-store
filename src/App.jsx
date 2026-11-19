@@ -1,24 +1,17 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
-
-function PlaceholderPage({ title }) {
-  return (
-    <div className="container py-5">
-      <h1 className="fw-bold">{title}</h1>
-      <p className="text-secondary">Em construção...</p>
-    </div>
-  );
-}
+import ProductListingPage from './pages/ProductListingPage';
+import ProductViewPage from './pages/ProductViewPage';
 
 export default function App() {
   return (
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/" element={<HomePage/>} />
-          <Route path="/products" element={<PlaceholderPage title="Listagem de Produtos"/>} />
-          <Route path="/product/:id" element={<PlaceholderPage title="Visualização do Produto"/>} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductListingPage />} />
+          <Route path="/product/:id" element={<ProductViewPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>
