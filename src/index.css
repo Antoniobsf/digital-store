@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --ds-primary: #C92071;
+  --ds-primary-hover: #991956;
+  --ds-secondary: #B5B6F2;
+  --ds-dark: #1F1F1F;
+  --ds-dark-gray: #474747;
+  --ds-light-gray: #8F8F8F;
+  --ds-bg-light: #F9F8FE;
+  --ds-warning: #F6AA1C;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--ds-bg-light);
+  color: var(--ds-dark);
+}
+
+.bg-ds-primary {
+  background-color: var(--ds-primary) !important;
+}
+
+.text-ds-primary {
+  color: var(--ds-primary) !important;
+}
+
+.btn-ds-primary {
+  background-color: var(--ds-primary);
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-ds-primary:hover {
+  background-color: var(--ds-primary-hover);
+  color: #ffffff;
+}
+
+.nav-link-ds {
+  color: var(--ds-dark-gray);
+  font-weight: 500;
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link-ds:hover,
+.nav-link-ds.active {
+  color: var(--ds-primary);
+  font-weight: 700;
+  border-bottom-color: var(--ds-primary);
+}
