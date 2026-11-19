@@ -20,3 +20,10 @@ Aplicação web de e-commerce desenvolvida em **React** como projeto final do m�
   * Busca integrada à barra de pesquisa do cabeçalho (`?filter=`).
   * Filtros interativos por **Marca** e **Categoria** com opção de limpar filtros.
   * Ordenação por **Mais relevantes**, **Menor preço** e **Maior
+  # 👟 Digital Store — Projeto Final de Front-end
+
+Aplicação web de e-commerce desenvolvida em **React** como projeto final do módulo de Front-end, seguindo a identidade visual oficial da **Digital Store**.
+
+## 🌐 Acesse o Projeto Online
+
+👉 **[https://digital-store-vert.vercel.app](https://digital-store-vert.vercel.app)**
